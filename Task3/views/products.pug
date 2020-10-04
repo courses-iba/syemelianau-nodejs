@@ -1,0 +1,28 @@
+extends layout
+
+block styles
+    link(rel= 'stylesheet', href= 'stylesheets/shop.css')
+
+block main
+    div#alert.alert
+        h3#status Status!
+        p#message Message.
+        span#close &times;
+    div.shop
+        each product in products
+            div.product
+                div.img
+                    img(src= product.img alt= product.name)
+                div.about
+                    p.name #{product.name}
+                    div.price
+                        p.cost $#{product.cost}
+                        div.input
+                            div.sign.minus -
+                            p.number 1
+                            div.sign.plus +
+                    button.add(id= `p${product.id}`) Add to basket
+
+block scripts
+    script(type= 'text/javascript' src= 'javascripts/products.js')
+    script= 'init();'

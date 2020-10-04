@@ -1,0 +1,8 @@
+ul.menu
+    each link, value in links
+        if (link === '')
+            li.active
+                a(href= link) #{value}
+        else
+            li
+                a(href= link) #{value}

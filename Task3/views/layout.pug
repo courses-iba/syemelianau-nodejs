@@ -1,0 +1,21 @@
+doctype html
+
+html
+    head
+        title= title
+        meta(charset= 'UTF-8')
+        link(rel='icon' type='image/png' href='images/logo.svg')
+        link(rel= 'stylesheet', href= 'stylesheets/struc.css')
+        link(rel= 'stylesheet', href= 'stylesheets/style.css')
+        block styles
+    body
+        div.wrapper
+            header.header
+                include header
+            nav.nav
+                include nav
+            main.main
+                block main
+            footer.footer
+                include footer
+        block scripts

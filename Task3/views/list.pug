@@ -1,0 +1,14 @@
+div.shop
+    each product in products
+        div.product
+            div.img
+                img(src= product.img alt= product.name)
+            div.about
+                p.name #{product.name}
+                p.cost #{product.number} x $#{product.cost}
+                div.btn
+                    button.rm(id= `r${product.id}`) Remove
+                    button.dec(id= `d${product.id}`) Decrease
+div.product.total
+    p.cost Total: $#{total}
+    button.add Clear basket

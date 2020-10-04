@@ -1,0 +1,9 @@
+extends layout
+
+block styles
+    link(rel= 'stylesheet', href= 'stylesheets/shop.css')
+
+block main
+    h1.welcome= error.message
+    h2.welcome= error.status
+    pre.product.error #{error.stack}
