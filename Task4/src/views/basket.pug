@@ -1,0 +1,11 @@
+extends layout
+
+block styles
+    link(rel= 'stylesheet', href= 'stylesheets/shop.css')
+
+block main
+    include list
+
+block scripts
+    script(type= 'text/javascript' src= 'javascripts/basket.js')
+    script= 'init();'
