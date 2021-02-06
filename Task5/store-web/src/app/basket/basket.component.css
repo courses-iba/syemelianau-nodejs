@@ -1,0 +1,27 @@
+mat-card-actions {
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.product {
+    display: flex;
+    margin: 5vh 10vh;
+}
+
+.product:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, .5);
+}
+
+.about {
+    display: flex;
+    flex-direction: column;
+}
+
+.img {
+    width: 15vh;
+    height: 15vh;
+    margin: 0 2vh;
+}

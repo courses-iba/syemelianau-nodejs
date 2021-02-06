@@ -1,0 +1,55 @@
+<mat-spinner
+        *ngIf="!loaded; else content"
+        diameter="50"
+        color="accent"
+></mat-spinner>
+<ng-template #content>
+    <mat-card *ngIf="error; else prods" class="product error">
+        <mat-card-title>Something went wrong...</mat-card-title>
+        <mat-card-content>{{error.message}}</mat-card-content>
+    </mat-card>
+    <ng-template #prods>
+        <mat-card *ngFor="let product of products" class="product">
+            <div class="about">
+                <mat-card-title>{{product.name}}</mat-card-title>
+                <mat-card-content>${{product.cost}}</mat-card-content>
+                <div class="spacer"></div>
+                <mat-card-actions>
+                    <button mat-stroked-button
+                            color="accent"
+                            matBadgeColor="accent"
+                            [matBadge]="product.count"
+                            [matBadgeHidden]="product.count === 1"
+                            (click)="add(product)"
+                    >
+                        Add
+                    </button>
+                </mat-card-actions>
+            </div>
+            <div class="spacer"></div>
+            <mat-card-actions>
+                <mat-slider
+                        max="9"
+                        min="1"
+                        step="1"
+                        tickInterval="1"
+                        vertical="true"
+                        thumbLabel="true"
+                        [(ngModel)]="product.count">
+                </mat-slider>
+            </mat-card-actions>
+            <img mat-card-image
+                 class="img"
+                 src="../assets/{{product.img}}"
+                 [alt]="product.name"
+            >
+        </mat-card>
+    </ng-template>
+    <mat-divider></mat-divider>
+    <mat-paginator showFirstLastButtons
+                   [length]="count"
+                   [pageSize]="pageSizeOptions[2]"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="getProducts($event)"
+    ></mat-paginator>
+</ng-template>

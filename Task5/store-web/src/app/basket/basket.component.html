@@ -1,0 +1,49 @@
+<mat-spinner
+        *ngIf="!loaded; else content"
+        diameter="50"
+        color="accent"
+></mat-spinner>
+<ng-template #content>
+    <mat-card *ngIf="error; else prods" class="product error">
+        <mat-card-title>Something went wrong...</mat-card-title>
+        <mat-card-content>{{error.message}}</mat-card-content>
+    </mat-card>
+    <ng-template #prods>
+        <mat-card *ngFor="let product of displayProducts" class="product">
+            <div class="about">
+                <mat-card-title>{{product.name}}</mat-card-title>
+                <mat-card-content>{{product.count}} x ${{product.cost}}</mat-card-content>
+                <div class="spacer"></div>
+                <mat-card-actions>
+                    <button mat-stroked-button color="warn" (click)="remove(product)">Remove</button>
+                    <button mat-stroked-button color="accent" (click)="decrease(product)">Decrease</button>
+                </mat-card-actions>
+            </div>
+            <div class="spacer"></div>
+            <img mat-card-image
+                 class="img"
+                 src="../assets/{{product.img}}"
+                 [alt]="product.name"
+            >
+        </mat-card>
+    </ng-template>
+    <mat-divider [class]="this.products.length || this.error ? '' : 'hidden'"></mat-divider>
+    <mat-paginator showFirstLastButtons
+                   [length]="products.length"
+                   [pageSize]="pageSizeOptions[2]"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="setPage($event)"
+    ></mat-paginator>
+    <mat-divider></mat-divider>
+    <mat-card class="product">
+        <div class="about">
+            <mat-card-title>Total</mat-card-title>
+            <mat-card-content>${{total}}</mat-card-content>
+            <div class="spacer"></div>
+            <mat-card-actions>
+                <button mat-stroked-button color="warn" (click)="clear()">Clear</button>
+                <button mat-stroked-button color="accent" (click)="order()">Order</button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</ng-template>

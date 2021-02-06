@@ -1,0 +1,33 @@
+.main {
+    flex: 1 0 auto;
+}
+
+.header a {
+    display: flex;
+    align-items: center;
+}
+
+.header a:hover .title {
+    color: #2f3640;
+    transition: 0.4s;
+}
+
+.header a:active .title {
+    color: #50bc5c;
+    transition: none;
+}
+
+.title {
+    padding: 0 0 0 1vw;
+    font-size: 2em;
+    color: #ccc;
+}
+
+.logo {
+    width: 2em;
+    height: 2em;
+}
+
+.footer {
+    flex: 0 0 auto;
+}
