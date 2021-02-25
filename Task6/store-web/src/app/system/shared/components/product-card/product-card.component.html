@@ -1,0 +1,55 @@
+<mat-card class="product">
+    <div class="about">
+        <mat-card-title>{{product.name}}</mat-card-title>
+        <mat-card-content>{{product.cost | currency}}</mat-card-content>
+        <div class="spacer"></div>
+        <mat-card-actions>
+            <button mat-stroked-button
+                    color="accent"
+                    matBadgeColor="accent"
+                    [matBadge]="product.count"
+                    [matBadgeHidden]="product.count === 1"
+                    (click)="add(product)"
+            >
+                Add
+            </button>
+        </mat-card-actions>
+    </div>
+    <div class="spacer"></div>
+    <mat-card-actions>
+        <mat-slider
+                max="9"
+                min="1"
+                step="1"
+                tickInterval="1"
+                vertical="true"
+                thumbLabel="true"
+                [(ngModel)]="product.count"
+        ></mat-slider>
+    </mat-card-actions>
+    <img mat-card-image
+         class="img"
+         src="../assets/{{product.img}}"
+         [alt]="product.name"
+    >
+    <div *ngIf="user && user.role === 'admin'" class="about">
+        <button
+                mat-icon-button
+                matTooltip="Delete"
+                [matTooltipPosition]="position.value"
+                color="accent"
+                (click)="deleteProduct(product)"
+        >
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button
+                mat-icon-button
+                matTooltip="Edit"
+                [matTooltipPosition]="position.value"
+                color="accent"
+                (click)="updateProduct(product)"
+        >
+            <mat-icon>edit</mat-icon>
+        </button>
+    </div>
+</mat-card>

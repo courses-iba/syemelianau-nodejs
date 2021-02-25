@@ -41,7 +41,7 @@ class OrderService {
         }
         const updateOrderDataById: Order = await this.orders.findByIdAndUpdate(orderId, { ...orderData }).exec();
         if (!updateOrderDataById) {
-            throw new HttpException(409, `Product '${orderId}' does not exist`);
+            throw new HttpException(409, `Order '${orderId}' does not exist`);
         }
         return updateOrderDataById;
     }
@@ -49,7 +49,7 @@ class OrderService {
     public async deleteOrder(orderId: string): Promise<Order> {
         const deleteOrderDataById: Order = await this.orders.findByIdAndDelete(orderId).exec();
         if (!deleteOrderDataById) {
-            throw new HttpException(409, `Product '${orderId}' does not exist`);
+            throw new HttpException(409, `Order '${orderId}' does not exist`);
         }
         return deleteOrderDataById;
     }

@@ -1,0 +1,26 @@
+.table-spinner {
+    margin: auto;
+}
+
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.action-buttons {
+    padding: 2vh;
+}
+
+.action-buttons * {
+    margin: 0.5vh;
+}
+
+.headers-align > *,
+.headers-align {
+    margin: 2vh 15vw;
+}

@@ -1,0 +1,24 @@
+<mat-spinner *ngIf="!loaded; else content" diameter="50" color="accent"></mat-spinner>
+<ng-template #content>
+    <mat-card *ngIf="error; else prods" class="product error">
+        <mat-card-title>Something went wrong...</mat-card-title>
+        <mat-card-content>{{error.message}}</mat-card-content>
+    </mat-card>
+    <ng-template #prods>
+        <app-basket-card
+                *ngFor="let product of displayProducts"
+                [product]="product"
+                (decrease)="decrease($event)"
+                (remove)="remove($event)"
+        ></app-basket-card>
+        <mat-divider [class]="this.products.length || this.error ? '' : 'hidden'"></mat-divider>
+        <mat-paginator showFirstLastButtons
+                       [length]="products.length"
+                       [pageSize]="pageSizeOptions[2]"
+                       [pageSizeOptions]="pageSizeOptions"
+                       (page)="setPage($event)"
+        ></mat-paginator>
+        <mat-divider></mat-divider>
+        <app-total [total]="total" (clear)="clear()" (order)="order()"></app-total>
+    </ng-template>
+</ng-template>

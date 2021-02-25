@@ -1,0 +1,43 @@
+<mat-card>
+    <mat-card-header class="center">
+        <mat-card-title>Registration</mat-card-title>
+    </mat-card-header>
+    <form class="form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <mat-card-content class="fields">
+            <mat-form-field appearance="outline" color="accent">
+                <mat-label>Email</mat-label>
+                <label><input matInput
+                              placeholder="example@mail.com"
+                              formControlName="email"
+                              type="email"
+                              required
+                              autofocus
+                ></label>
+                <mat-icon matSuffix>email</mat-icon>
+                <mat-error>{{emailErrorMessages()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" color="accent">
+                <mat-label>Password</mat-label>
+                <label><input matInput
+                              placeholder="123456"
+                              formControlName="password"
+                              [type]="hidePassword ? 'password' : 'text'"
+                              required
+                ></label>
+                <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error>{{passwordErrorMessages()}}</mat-error>
+            </mat-form-field>
+            <mat-checkbox class="flex" color="accent" formControlName="agree">I agree with the rules</mat-checkbox>
+        </mat-card-content>
+        <mat-card-actions class="flex">
+            <button mat-stroked-button type="reset" routerLink="/">Cancel</button>
+            <button mat-stroked-button color="accent" type="submit" [disabled]="registrationForm.invalid">Submit</button>
+        </mat-card-actions>
+    </form>
+    <div class="flex">
+        <span class="spacer"></span>
+        <p>Already have an account? <a routerLink="/login">Login!</a></p>
+    </div>
+</mat-card>

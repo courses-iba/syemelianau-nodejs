@@ -1,0 +1,52 @@
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+td, th {
+    width: 25%;
+}
+
+.order {
+    margin: 1vw 15vw;
+}
+
+.footer-row {
+    font-weight: bold;
+}
+
+tr.detail-row {
+    height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+    background: whitesmoke;
+}
+
+tr.element-row:not(.expanded-row):active {
+    background: #efefef;
+}
+
+.element-row td {
+    border-bottom-width: 0;
+}
+
+.element-row {
+    cursor: pointer;
+}
+
+.element-detail {
+    overflow: hidden;
+    display: flex;
+}
+
+.element-symbol {
+    font-weight: bold;
+    font-size: 2em;
+    max-width: 5vw;
+    line-height: normal;
+}

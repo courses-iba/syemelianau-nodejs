@@ -1,0 +1,20 @@
+<mat-card class="product">
+    <mat-card-content>
+        <mat-panel-title>Email: {{user.email}}</mat-panel-title>
+        <mat-card-subtitle>Role: {{user.role}}</mat-card-subtitle>
+        <mat-card-actions>Account creation date: {{user.date | date}}</mat-card-actions>
+    </mat-card-content>
+</mat-card>
+<mat-spinner *ngIf="!loaded; else content" diameter="50" color="accent"></mat-spinner>
+<ng-template #content>
+    <mat-card *ngIf="error; else usr" class="product error">
+        <mat-card-title>Something went wrong...</mat-card-title>
+        <mat-card-content>{{error.message}}</mat-card-content>
+    </mat-card>
+    <ng-template #usr>
+        <mat-spinner *ngIf="!orders; else list" diameter="50" color="accent" class="table-spinner"></mat-spinner>
+        <ng-template #list>
+            <app-order-table *ngFor="let order of orders" [order]="order" [admin]="false"></app-order-table>
+        </ng-template>
+    </ng-template>
+</ng-template>

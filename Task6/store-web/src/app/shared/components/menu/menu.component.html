@@ -1,0 +1,21 @@
+<button *ngIf="!user; else menu" mat-stroked-button color="accent" routerLink="/login">Login</button>
+<ng-template #menu>
+    <button *ngIf="user!.role === 'admin'"
+            mat-icon-button
+            matTooltip="Add"
+            color="accent"
+            (click)="add()"
+    >
+        <mat-icon>add</mat-icon>
+    </button>
+    <button mat-icon-button
+            [matTooltip]="user!.email"
+            [routerLink]="user!.role === 'admin' ? '/admin' : '/user'"
+            color="accent"
+    >
+        <mat-icon>{{user!.role === 'admin' ? 'home' : 'account_circle'}}</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Logout" color="accent" (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+    </button>
+</ng-template>

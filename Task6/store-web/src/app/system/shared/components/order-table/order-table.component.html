@@ -1,0 +1,51 @@
+<mat-card class="mat-elevation-z8 order">
+    <mat-card-header>
+        <mat-card-title>Date: {{order.date | date}}</mat-card-title>
+        <mat-card-subtitle>Order ID: {{order._id}}</mat-card-subtitle>
+        <div class="spacer"></div>
+        <mat-card-actions>
+            <button *ngIf="admin" mat-stroked-button color="accent" (click)="deleteOrder(order._id!)">Close</button>
+        </mat-card-actions>
+    </mat-card-header>
+    <mat-card-content>
+        <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                <td mat-cell *matCellDef="let product">{{product.name}}</td>
+                <td mat-footer-cell *matFooterCellDef>Total</td>
+            </ng-container>
+            <ng-container matColumnDef="count">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Count</th>
+                <td mat-cell *matCellDef="let product">{{product.count | number}}</td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+            <ng-container matColumnDef="cost">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Cost</th>
+                <td mat-cell *matCellDef="let product">{{product.cost | currency}}</td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+            <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
+                <td mat-cell *matCellDef="let product">{{product.total | currency}}</td>
+                <td mat-footer-cell *matFooterCellDef> {{order.total | currency}} </td>
+            </ng-container>
+            <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let product" [attr.colspan]="displayedColumns.length">
+                    <div class="element-detail" [@detailExpand]="product == expandedElement ? 'expanded' : 'collapsed'">
+                        <img src="assets/{{product.img}}" [alt]="product.name" class="img">
+                        <div class="element-symbol">{{product.name}}</div>
+                    </div>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let product; columns: displayedColumns;"
+                class="element-row"
+                [class.example-expanded-row]="expandedElement === product"
+                (click)="expandedElement = expandedElement === product ? null : product"
+            ></tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns" class="footer-row"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSizeOptions[2]"></mat-paginator>
+    </mat-card-content>
+</mat-card>

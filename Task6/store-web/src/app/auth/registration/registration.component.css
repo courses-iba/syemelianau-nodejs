@@ -1,0 +1,14 @@
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex {
+    padding: 0 1vw;
+    display: flex;
+}

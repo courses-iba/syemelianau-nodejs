@@ -1,0 +1,49 @@
+<mat-spinner *ngIf="!loaded; else content" diameter="50" color="accent"></mat-spinner>
+<ng-template #content>
+    <mat-card *ngIf="error; else list" class="product error">
+        <mat-card-title>Something went wrong...</mat-card-title>
+        <mat-card-content>{{error.message}}</mat-card-content>
+    </mat-card>
+    <ng-template #list>
+        <div class="action-buttons">
+            <button mat-stroked-button (click)="openAll()">Expand All</button>
+            <button mat-stroked-button (click)="closeAll()">Collapse All</button>
+        </div>
+        <mat-accordion class="headers-align" multi>
+            <mat-expansion-panel
+                    *ngFor="let user of users"
+                    [expanded]="expandedUserId === user._id!"
+                    (opened)="getUserOrders(user._id!)"
+                    (closed)="setUndefined(user._id!)"
+            >
+                <mat-expansion-panel-header>
+                    <mat-panel-title>{{user.email}}</mat-panel-title>
+                    <mat-panel-description>
+                        Date: {{user.date | date}} Role: {{user.role}}
+                        <mat-icon>account_circle</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-spinner *ngIf="!user.orders; else orders" diameter="50" color="accent" class="table-spinner">
+                </mat-spinner>
+                <ng-template #orders>
+                    <app-order-table
+                            *ngFor="let order of user.orders"
+                            [order]="order"
+                            [admin]="true"
+                            (close)="refreshUserOrders(user._id!)"
+                    ></app-order-table>
+                </ng-template>
+                <mat-action-row>
+                    <button mat-stroked-button color="warn" (click)="deleteUser(user._id!)">Delete</button>
+                    <span class="spacer"></span>
+                    <button *ngIf="isPrev()" mat-stroked-button color="warn" (click)="prevStep(user._id!)">
+                        Previous
+                    </button>
+                    <button *ngIf="isNext()" mat-stroked-button color="accent" (click)="nextStep(user._id!)">
+                        Next
+                    </button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </ng-template>
+</ng-template>
